@@ -8,6 +8,7 @@ import sharedStyles from '../../views/Styles';
 import ActivityIndicator from '../ActivityIndicator';
 import { CustomIcon, TIconsName } from '../CustomIcon';
 import { TextInput } from './TextInput';
+import { themes } from '../../lib/constants';
 
 const styles = StyleSheet.create({
 	error: {
@@ -20,7 +21,7 @@ const styles = StyleSheet.create({
 	},
 	label: {
 		fontSize: 16,
-		lineHeight: 22,
+		lineHeight: 24,
 		...sharedStyles.textMedium
 	},
 	input: {
@@ -85,7 +86,7 @@ export const FormTextInput = ({
 	placeholder,
 	...inputProps
 }: IRCTextInputProps): React.ReactElement => {
-	const { colors } = useTheme();
+	const { colors, theme } = useTheme();
 	const [showPassword, setShowPassword] = useState(false);
 	const showClearInput = onClearInput && value && value.length > 0;
 	const Input = bottomSheet ? BottomSheetTextInput : TextInput;
@@ -105,7 +106,7 @@ export const FormTextInput = ({
 						(secureTextEntry || iconRight || showClearInput) && styles.inputIconRight,
 						{
 							backgroundColor: colors.surfaceRoom,
-							borderColor: colors.strokeLight,
+							borderColor: themes[theme].strokeMedium,
 							color: colors.fontTitlesLabels
 						},
 						error?.error && {
